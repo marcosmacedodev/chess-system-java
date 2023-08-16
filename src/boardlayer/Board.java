@@ -7,6 +7,9 @@ public class Board {
 	
 	public Board(int rows, int columns) 
 	{
+		if(rows < 1 || columns < 1) {
+			throw new BoardException("Erro creating board: there must be at least 1 row and 1 column");
+		}
 		this.rows = rows;
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
@@ -24,19 +27,25 @@ public class Board {
 	
 	public Piece piece(int row, int column) 
 	{
-		return piece(new Position(row, column));
+		if(!positionExists(row, column)) 
+		{
+			throw new BoardException("Position not on the board");
+		}
+		return pieces[row][column];
 	}
 	
 	public Piece piece(Position position) 
 	{
-		if (pieces == null) return null;
 		int row = position.getRow();
 		int column = position.getColumn();
-		return pieces[row][column];
+		return piece(row, column);
 	}
 	
 	public void placePiece(Piece piece, Position position) 
 	{
+		if(thereIsAPiece(position)) {
+			throw new BoardException("There is already a piece on position " + position);
+		}
 		int row = position.getRow();
 		int column = position.getColumn();
 		pieces[row][column] = piece;
@@ -59,6 +68,10 @@ public class Board {
 	
 	public boolean thereIsAPiece(Position position) 
 	{
+		if(!positionExists(position)) 
+		{
+			throw new BoardException("Position not on the board");
+		}
 		return piece(position) != null;
 	}
 }
