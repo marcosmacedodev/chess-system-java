@@ -48,9 +48,17 @@ public class Board {
 		return null;
 	}
 	
-	public boolean PositionExists(Position position) 
-	{
-		return false;
+	private boolean positionExists(int row, int column) {
+		return row >= 0 && row < rows && column >= 0 && column < columns;
 	}
 	
+	public boolean positionExists(Position position) 
+	{
+		return positionExists(position.getRow(), position.getColumn());
+	}
+	
+	public boolean thereIsAPiece(Position position) 
+	{
+		return piece(position) != null;
+	}
 }
