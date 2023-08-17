@@ -18,18 +18,26 @@ public class ChessMatch {
 	public ChessPiece[][] getPieces()
 	{
 		ChessPiece[][] chessPieces = new ChessPiece[board.getRows()][board.getColumns()];
-		for(int itx = 0; itx < board.getRows(); itx++) {
-			for(int ity = 0; ity < board.getColumns(); ity++) {
+		for(int itx = 0; itx < board.getRows(); itx++) 
+		{
+			for(int ity = 0; ity < board.getColumns(); ity++) 
+			{
 				chessPieces[itx][ity] = (ChessPiece)board.piece(itx, ity);
 			}
 		}
 		return chessPieces;
 	}
+	
+	private void placeNewPiece(char column, int row, ChessPiece piece)
+	{
+		board.placePiece(piece, new ChessPosition(row, column).toPosition());
+	}
 
-	private void initialSetup() {
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
-		board.placePiece(new King(board, Color.BLACK), new Position(0, 4));
-		board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
+	private void initialSetup() 
+	{
+		placeNewPiece('b', 6, new Rook(board, Color.WHITE));
+		placeNewPiece('e', 8, new King(board, Color.BLACK));
+		placeNewPiece('e', 1, new King(board, Color.WHITE));
 	}
 
 }
