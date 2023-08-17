@@ -16,12 +16,14 @@ public abstract class Piece {
 	
 	public boolean possibleMove(Position position) 
 	{
-		return false;
+		int row = position.getRow();
+		int column = position.getColumn();
+		return possibleMoves()[row][column];
 	}
 	
 	public boolean isThereAnyPossibleMove() 
 	{
-		return false;
+		return possibleMoves().length > 0;
 	}
 
 	protected Board getBoard() {
