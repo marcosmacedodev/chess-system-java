@@ -17,7 +17,7 @@ public class Main {
 		while(true) {
 			try {
 				UI.clearScreen();
-				UI.printBoard(cm.getPieces());
+				UI.printMatch(cm);
 	
 				System.out.println();
 				System.out.print("Source: ");
