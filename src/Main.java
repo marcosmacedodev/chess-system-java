@@ -16,18 +16,22 @@ public class Main {
 		
 		while(true) {
 			try {
-			UI.clearScreen();
-			UI.printBoard(cm.getPieces());
-
-			System.out.println();
-			System.out.print("Source: ");
-			ChessPosition source = UI.readChessPosition(sc);
-			
-			System.out.println();
-			System.out.print("Target: ");
-			ChessPosition target = UI.readChessPosition(sc);
-			
-			ChessPiece capturedPiece = cm.performChessMove(source, target);
+				UI.clearScreen();
+				UI.printBoard(cm.getPieces());
+	
+				System.out.println();
+				System.out.print("Source: ");
+				ChessPosition source = UI.readChessPosition(sc);
+				
+				boolean [][] possibleMoves = cm.possibleMoves(source);
+				UI.clearScreen();
+				UI.printBoard(cm.getPieces(), possibleMoves);
+				
+				System.out.println();
+				System.out.print("Target: ");
+				ChessPosition target = UI.readChessPosition(sc);
+				
+				ChessPiece capturedPiece = cm.performChessMove(source, target);
 			}
 			catch(ChessException ex) {
 				System.out.println(ex.getMessage());
