@@ -8,6 +8,7 @@ import boardlayer.Board;
 import boardlayer.Piece;
 import boardlayer.Position;
 import chesslayer.pieces.King;
+import chesslayer.pieces.Knight;
 import chesslayer.pieces.Rook;
 
 public class ChessMatch {
@@ -132,12 +133,19 @@ public class ChessMatch {
 	}
 	
 	private Color opponent(Color color) {
-		return color == Color.WHITE? Color.BLACK: Color.WHITE;
+		return (color == Color.WHITE) ? Color.BLACK: Color.WHITE;
 	}
 	
 	private ChessPiece king(Color color) {
 		List<Piece> list = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == color).collect(Collectors.toList());
-		return (ChessPiece)list.stream().filter(x -> (x instanceof King)).findFirst().orElseThrow(() -> new IllegalStateException("There is no "+ color +" King on the board"));
+		
+		for(Piece p: list) {
+			if(p instanceof King) {
+				return (ChessPiece)p;
+			}
+		}
+		throw new IllegalStateException("There is no "+ color +" King on the board");
+		//return (ChessPiece)list.stream().filter(x -> (x instanceof King)).findFirst().orElseThrow(() -> new IllegalStateException("There is no "+ color +" King on the board"));
 	}
 	
 	private boolean testCheck(Color color) {
@@ -190,8 +198,10 @@ public class ChessMatch {
 	private void initialSetup() 
 	{
 		placeNewPiece('b', 6, new Rook(board, Color.WHITE));
-		placeNewPiece('e', 8, new King(board, Color.BLACK));
+		placeNewPiece('e', 8, new Knight(board, Color.WHITE));
 		placeNewPiece('e', 1, new King(board, Color.WHITE));
+		
+		placeNewPiece('e', 5, new King(board, Color.BLACK));
 	}
 	
 	private void nextTurn() {
