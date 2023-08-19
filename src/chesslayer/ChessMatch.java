@@ -8,8 +8,7 @@ import boardlayer.Board;
 import boardlayer.Piece;
 import boardlayer.Position;
 import chesslayer.pieces.King;
-import chesslayer.pieces.Knight;
-import chesslayer.pieces.Rook;
+import chesslayer.pieces.Queen;
 
 public class ChessMatch {
 	
@@ -197,11 +196,12 @@ public class ChessMatch {
 
 	private void initialSetup() 
 	{
-		placeNewPiece('b', 6, new Rook(board, Color.WHITE));
-		placeNewPiece('e', 8, new Knight(board, Color.WHITE));
-		placeNewPiece('e', 1, new King(board, Color.WHITE));
 		
-		placeNewPiece('e', 5, new King(board, Color.BLACK));
+		placeNewPiece('a', 1, new King(board, Color.WHITE));
+		
+		placeNewPiece('d', 4, new Queen(board, Color.WHITE));
+		
+		placeNewPiece('f', 7, new King(board, Color.BLACK));
 	}
 	
 	private void nextTurn() {
